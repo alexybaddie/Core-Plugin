@@ -50,14 +50,11 @@ your-module-project/
      - `module.yml` (module metadata)
 
 2. **Update Package Names**  
-   - Open each `.java` file and change the package declaration at the top from:
-     ```java
-     package net.lexibaddie.modules;
-     ```
-     to:
+   - Open each `.java` file and change the package declaration at the top:
      ```java
      package your.username.modules;
      ```
+     to your own package username declaration.
      (Adjust subpackages such as `commands` and `listeners` similarly.)
 
 3. **Adjust Class Names** (Optional)  
