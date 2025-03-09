@@ -51,6 +51,7 @@ your-module-project/
 
 2. **Update Package Names**  
    - Open each `.java` file and change the package declaration at the top:
+     
      ```java
      package your.username.modules;
      ```
