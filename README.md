@@ -56,7 +56,7 @@ your-module-project/
      ```
      to:
      ```java
-     package your.name.modules;
+     package your.username.modules;
      ```
      (Adjust subpackages such as `commands` and `listeners` similarly.)
 
