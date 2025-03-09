@@ -362,7 +362,7 @@ api-version: '1.20'
 
 1. **Place `module.yml` and `template.yml`** in your module’s resources (root of the JAR) so they can be loaded at runtime.
 2. **Compile your module** into a JAR with the above classes.
-3. **Drop the JAR** into the appropriate directory where the `net.lexibaddie.core` plugin loads modules.
+3. **Drop the JAR** into the appropriate directory where the Core plugin loads modules.
 4. **Start or reload** the server; the `TemplateModule`’s `onLoad` method will run, copying `template.yml` into the `module-configs` folder (if it doesn’t already exist), registering a command, and setting up a listener.
 
 By following this template, you can create your own fully customized modules—just rename classes, packages, and configuration files to suit your project’s needs.
