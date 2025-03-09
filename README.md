@@ -35,7 +35,7 @@ your-module-project/
 └── pom.xml (or gradle build file)
 ```
 
-> **Important**: Make sure to rename the package from `net.lexibaddie.modules` to `your.username.modules` (or the package structure you prefer).
+> **Important**: Make sure to rename the package from `your.username.modules` to the package structure you prefer.
 
 ---
 
