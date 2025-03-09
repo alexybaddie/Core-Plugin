@@ -1,6 +1,6 @@
 # Creating a Custom Module for the Core Plugin
 
-This guide explains how to create a new module for the `net.lexibaddie.core` plugin using the **TemplateModule** as an example.
+This guide explains how to create a new module for the Core plugin using the **TemplateModule** as an example.
 
 ---
 
