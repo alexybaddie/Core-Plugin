@@ -6,7 +6,7 @@ This guide explains how to create a new module for the `net.lexibaddie.core` plu
 
 ## 1. Overview
 
-A **module** is a self-contained add-on that the core plugin (`net.lexibaddie.core`) can load and unload dynamically. Each module:
+A **module** is a self-contained add-on that the core plugin can load and unload dynamically. Each module:
 - Implements the `net.lexibaddie.core.moduleloader` interface in its main class.
 - Includes a `module.yml` file in the JAR with metadata (name, version, main class, and `api-version`).
 - Copies or loads its own config file(s) into the `module-configs` folder inside the core plugin’s data directory.
