@@ -117,7 +117,7 @@ your-module-project/
 ## 5. Building and Packaging
 
 1. **Set up your build tool** (Maven, Gradle, etc.).  
-2. **Include the core plugin dependency** (`net.lexibaddie.core`) if needed.  
+2. **Include the core plugin dependency** (`net.lexibaddie.core`).  
 3. **Compile** your code into a JAR.  
 4. Verify that your `module.yml` and `template.yml` are included in the final JAR root (so they can be accessed at runtime).
 
