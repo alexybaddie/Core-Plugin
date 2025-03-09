@@ -1,4 +1,4 @@
-package net.lexibaddie.modules.commands;
+package your.username.modules.commands;
 
 import net.lexibaddie.core.main;
 import org.bukkit.command.Command;

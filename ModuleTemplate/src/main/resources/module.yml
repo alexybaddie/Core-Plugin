@@ -1,4 +1,4 @@
 name: core-module-template
 version: '${project.version}'
-main: net.lexibaddie.modules.TemplateModule
+main: your.username.modules.TemplateModule
 api-version: '1.20'

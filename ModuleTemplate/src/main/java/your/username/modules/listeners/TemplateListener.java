@@ -1,4 +1,4 @@
-package net.lexibaddie.modules.listeners;
+package your.username.modules.listeners;
 
 import net.lexibaddie.core.main;
 import org.bukkit.configuration.file.YamlConfiguration;

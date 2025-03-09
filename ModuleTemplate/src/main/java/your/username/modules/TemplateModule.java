@@ -1,10 +1,11 @@
-package net.lexibaddie.modules;
+package your.username.modules;
+
+import your.username.modules.commands.TemplateCommand;
+import your.username.modules.listeners.TemplateListener;
 
 import net.lexibaddie.core.main;
 import net.lexibaddie.core.moduleloader;
-import net.lexibaddie.modules.commands.TemplateCommand;
 import net.lexibaddie.modules.commands.ReflectCommand;
-import net.lexibaddie.modules.listeners.TemplateListener;
 import org.bukkit.command.CommandMap;
 import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
