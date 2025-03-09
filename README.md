@@ -142,7 +142,7 @@ your-module-project/
 
 ---
 
-# Core Module Template — Example Classes
+# Core Module Example
 
 Below are example classes (and their config files) showcasing how to implement a custom module using the `moduleloader` interface and the reflection-based command registration in the **Core Plugin**.
 
