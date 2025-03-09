@@ -1,0 +1,4 @@
+name: core-chatchannels
+version: '${project.version}'
+main: net.lexibaddie.modules.ChatChannelsModule
+api-version: '1.20'

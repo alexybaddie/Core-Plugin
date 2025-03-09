@@ -1,0 +1,5 @@
+#----------------------------------------------------------#
+#           Template Example Configuration File            #
+#----------------------------------------------------------#
+greeting: "&aHello, welcome to the TemplateModule!"
+join-message: "&aWelcome, %player%, to our server!"

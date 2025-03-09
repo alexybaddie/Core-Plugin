@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="core-chatchannels:jar">
+    <output-path>$USER_HOME$/Desktop/minecraft-server-download/plugins/Core/modules</output-path>
+    <root id="archive" name="core-chatchannels.jar">
+      <element id="module-output" name="core-chatchannels" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/minecraft-server-download/plugins/Core.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

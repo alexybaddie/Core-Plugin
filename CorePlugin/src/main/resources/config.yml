@@ -1,0 +1,10 @@
+#----------------------------------------------------------#
+#                     THEME SETTINGS                       #
+#----------------------------------------------------------#
+theme:
+  primary: "#ffa4bf"
+  secondary: "&f"
+  tertiary: "&7"
+  success: "&a"
+  error: "&c"
+  # Add any other custom colors or prefixes here

@@ -1,0 +1,21 @@
+#----------------------------------------------------------#
+#                    GENERAL SETTINGS                      #
+#----------------------------------------------------------#
+general:
+  only_players: "%error%Only players can use this command."
+  no_permission: "%error%You don't have permission to use this command."
+  command_disabled: "%error%This command has been disabled."
+  player_not_found: "%error%Player not found or is not online."
+  usage: "%error%Usage: %usage%"
+
+#----------------------------------------------------------#
+#                           CHAT                           #
+#----------------------------------------------------------#
+messaging:
+  enabled: true # Enables all commands and events under the "messaging" category
+  permission: "core.default"
+  chat:
+    chat_format: "%secondary%%player% %primary%» %secondary%%message%"
+  direct:
+    to_format: "%primary%To %secondary%%target% %primary%» %secondary%%message%"
+    from_format: "%primary%From %secondary%%sender% %primary%» %secondary%%message%"

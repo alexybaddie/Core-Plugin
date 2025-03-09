@@ -1,0 +1,23 @@
+# Default channel is "all"
+default: all
+
+channels:
+  all:
+    display: "&aALL"
+    aliases:
+      - a
+      - main
+      - default
+  staff:
+    display: "&bSTAFF"
+    permission: "chat.staff"
+    format: "&b[STAFF] &f%player% » %message%"
+    aliases:
+      - s
+      - sc
+  admin:
+    display: "&cADMIN"
+    permission: "chat.admin"
+    format: "&c[ADMIN] &f%player% » %message%"
+    aliases:
+      - ao
