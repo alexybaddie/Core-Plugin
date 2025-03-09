@@ -35,7 +35,7 @@ your-module-project/
 └── pom.xml (or gradle build file)
 ```
 
-> **Important**: Make sure to rename the package from `net.lexibaddie.modules` to `your.name.modules` (or the package structure you prefer).
+> **Important**: Make sure to rename the package from `net.lexibaddie.modules` to `your.username.modules` (or the package structure you prefer).
 
 ---
 
@@ -97,7 +97,7 @@ your-module-project/
   ```yaml
   name: core-module-template
   version: '1.0'
-  main: your.name.modules.TemplateModule
+  main: your.username.modules.TemplateModule
   api-version: '1.20'
   ```
 - **`main:`** must point to your module’s main class (the one implementing `moduleloader`).
@@ -157,12 +157,13 @@ These files collectively demonstrate:
 ## 1. TemplateModule.java
 
 ```java
-package net.lexibaddie.modules;
+package your.username.modules;
+
+import your.username.modules.commands.TemplateCommand;
+import your.username.modules.commands.ReflectCommand;
 
 import net.lexibaddie.core.main;
 import net.lexibaddie.core.moduleloader;
-import net.lexibaddie.modules.commands.TemplateCommand;
-import net.lexibaddie.modules.commands.ReflectCommand;
 import net.lexibaddie.modules.listeners.TemplateListener;
 import org.bukkit.command.CommandMap;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -271,7 +272,7 @@ public class TemplateModule implements moduleloader {
 ## 2. TemplateCommand.java
 
 ```java
-package net.lexibaddie.modules.commands;
+package your.username.modules.commands;
 
 import net.lexibaddie.core.main;
 import org.bukkit.command.Command;
@@ -310,7 +311,7 @@ public class TemplateCommand implements CommandExecutor {
 ## 3. TemplateListener.java
 
 ```java
-package net.lexibaddie.modules.listeners;
+package your.username.modules.listeners;
 
 import net.lexibaddie.core.main;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -354,7 +355,7 @@ join-message: "&aWelcome, %player%, to our server!"
 ```yaml
 name: core-module-template
 version: '${project.version}'
-main: net.lexibaddie.modules.TemplateModule
+main: your.username.modules.TemplateModule
 api-version: '1.20'
 ```
 
