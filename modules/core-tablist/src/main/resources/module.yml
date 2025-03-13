@@ -1,0 +1,4 @@
+name: core-tablist
+version: '${project.version}'
+main: net.lexibaddie.modules.TablistModule
+api-version: '1.20'

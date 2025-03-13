@@ -1,0 +1,9 @@
+header:
+  - "&b&l<small>SERVER</small>"
+  - "&a<small>Enjoy your stay!</small>"
+  - ""
+footer:
+  - ""
+  - "&a<small>Visit our website!</small>"
+  - "&e<small>www.server.com</small>"
+margin: 2

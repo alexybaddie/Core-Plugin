@@ -1,0 +1,4 @@
+name: core-commandmanager
+version: '3.0'
+main: net.lexibaddie.modules.CommandManagerModule
+api-version: '1.20'

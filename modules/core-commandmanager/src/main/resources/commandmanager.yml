@@ -1,0 +1,32 @@
+# Command Manager Configuration
+#
+# This configuration allows you to manage commands from any plugin or module.
+# Each key under "commands" is the original command name (without the leading slash).
+# Under each command, you can set the following options:
+#
+# disable: (true/false) If true, the command is disabled (unregistered) and no replacement is made.
+# replace: (string) The new command name to replace the original command.
+#          Leave empty (or as an empty string) if you do not want to change the command name.
+# aliases: (list) A list of aliases to add to the command.
+#
+# Examples:
+#
+# EXAMPLE ON REPLACING A COMMAND
+# example:
+#   disable: false
+#   replace: example2
+#   aliases:
+#     - example3
+#     - example4
+#
+# EXAMPLE ON DISABLING A COMMAND
+# example:
+#   disable: true
+#   replace: ""
+#   aliases: []
+#
+commands:
+  example:
+    disable: true
+    replace: ""
+    aliases: []

@@ -1,0 +1,4 @@
+name: core-commandmanager
+version: '${project.version}'
+main: net.lexibaddie.modules.CommandManagerModule
+api-version: '1.20'

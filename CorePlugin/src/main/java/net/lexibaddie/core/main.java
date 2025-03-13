@@ -34,6 +34,54 @@ public final class main extends JavaPlugin {
         return instance;
     }
 
+
+    // Pre-defined mapping from regular letters to small caps.
+    private static final Map<Character, String> SMALL_CAPS_MAP = new HashMap<>();
+    static {
+        SMALL_CAPS_MAP.put('a', "ᴀ");
+        SMALL_CAPS_MAP.put('b', "ʙ");
+        SMALL_CAPS_MAP.put('c', "ᴄ");
+        SMALL_CAPS_MAP.put('d', "ᴅ");
+        SMALL_CAPS_MAP.put('e', "ᴇ");
+        SMALL_CAPS_MAP.put('f', "ꜰ");
+        SMALL_CAPS_MAP.put('g', "ɢ");
+        SMALL_CAPS_MAP.put('h', "ʜ");
+        SMALL_CAPS_MAP.put('i', "ɪ");
+        SMALL_CAPS_MAP.put('j', "ᴊ");
+        SMALL_CAPS_MAP.put('k', "ᴋ");
+        SMALL_CAPS_MAP.put('l', "ʟ");
+        SMALL_CAPS_MAP.put('m', "ᴍ");
+        SMALL_CAPS_MAP.put('n', "ɴ");
+        SMALL_CAPS_MAP.put('o', "ᴏ");
+        SMALL_CAPS_MAP.put('p', "ᴘ");
+        SMALL_CAPS_MAP.put('q', "ǫ");
+        SMALL_CAPS_MAP.put('r', "ʀ");
+        SMALL_CAPS_MAP.put('s', "ѕ");
+        SMALL_CAPS_MAP.put('t', "ᴛ");
+        SMALL_CAPS_MAP.put('u', "ᴜ");
+        SMALL_CAPS_MAP.put('v', "ᴠ");
+        SMALL_CAPS_MAP.put('w', "ᴡ");
+        SMALL_CAPS_MAP.put('x', "x");  // No true small cap for x.
+        SMALL_CAPS_MAP.put('y', "ʏ");
+        SMALL_CAPS_MAP.put('z', "ᴢ");
+    }
+
+    // Converts a given string to its small caps equivalent.
+    public static String toSmallCaps(String message) {
+        if (message == null) return "";
+        StringBuilder result = new StringBuilder();
+        for (char c : message.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char lower = Character.toLowerCase(c);
+                String smallCap = SMALL_CAPS_MAP.get(lower);
+                result.append(smallCap != null ? smallCap : c);
+            } else {
+                result.append(c);
+            }
+        }
+        return result.toString();
+    }
+
     /**
      * Helper method to apply theme colors from the main config.
      * This method translates placeholders (e.g., %primary%) from the "theme" section,
@@ -42,9 +90,11 @@ public final class main extends JavaPlugin {
      * @param message The message to translate.
      * @return The formatted message.
      */
+
     public static String applyColors(String message) {
         if (message == null) return "";
-        // Get the theme section from the config.
+
+        // 1. Process theme placeholders.
         ConfigurationSection themeSection = instance.getConfig().getConfigurationSection("theme");
         if (themeSection != null) {
             for (String key : themeSection.getKeys(false)) {
@@ -53,21 +103,74 @@ public final class main extends JavaPlugin {
                 message = message.replace(placeholder, colorCode);
             }
         }
-        // Translate legacy & color codes.
+
+        // 2. Convert <small>...</small> tags to small caps.
+        Pattern smallTagPattern = Pattern.compile("<small>(.*?)</small>", Pattern.DOTALL);
+        Matcher tagMatcher = smallTagPattern.matcher(message);
+        StringBuffer sb = new StringBuffer();
+        while (tagMatcher.find()) {
+            String innerText = tagMatcher.group(1);
+            String smallCapped = toSmallCaps(innerText);
+            tagMatcher.appendReplacement(sb, Matcher.quoteReplacement(smallCapped));
+        }
+        tagMatcher.appendTail(sb);
+        message = sb.toString();
+
+        // 3. Convert %smallcaps%...%normal% markers to small caps.
+        Pattern markerPattern = Pattern.compile("%smallcaps%(.*?)%normal%", Pattern.DOTALL);
+        Matcher markerMatcher = markerPattern.matcher(message);
+        sb = new StringBuffer();
+        while (markerMatcher.find()) {
+            String innerText = markerMatcher.group(1);
+            String smallCapped = toSmallCaps(innerText);
+            markerMatcher.appendReplacement(sb, Matcher.quoteReplacement(smallCapped));
+        }
+        markerMatcher.appendTail(sb);
+        message = sb.toString();
+
+        // 4. Translate legacy color codes.
         message = ChatColor.translateAlternateColorCodes('&', message);
-        // Replace hex color codes (e.g., #RRGGBB) with Minecraft's hex format.
+
+        // 5. Replace hex color codes (e.g., #RRGGBB) with Minecraft's hex format.
         Pattern hexPattern = Pattern.compile("#([A-Fa-f0-9]{6})");
-        Matcher matcher = hexPattern.matcher(message);
-        while (matcher.find()) {
-            String hexColor = matcher.group(1);
+        Matcher hexMatcher = hexPattern.matcher(message);
+        while (hexMatcher.find()) {
+            String hexColor = hexMatcher.group(1);
             StringBuilder minecraftHex = new StringBuilder("§x");
             for (char c : hexColor.toCharArray()) {
                 minecraftHex.append("§").append(c);
             }
             message = message.replace("#" + hexColor, minecraftHex.toString());
         }
+
         return message;
     }
+//    public static String applyColors(String message) {
+//        if (message == null) return "";
+//        // Get the theme section from the config.
+//        ConfigurationSection themeSection = instance.getConfig().getConfigurationSection("theme");
+//        if (themeSection != null) {
+//            for (String key : themeSection.getKeys(false)) {
+//                String placeholder = "%" + key + "%";
+//                String colorCode = themeSection.getString(key, "");
+//                message = message.replace(placeholder, colorCode);
+//            }
+//        }
+//        // Translate legacy & color codes.
+//        message = ChatColor.translateAlternateColorCodes('&', message);
+//        // Replace hex color codes (e.g., #RRGGBB) with Minecraft's hex format.
+//        Pattern hexPattern = Pattern.compile("#([A-Fa-f0-9]{6})");
+//        Matcher matcher = hexPattern.matcher(message);
+//        while (matcher.find()) {
+//            String hexColor = matcher.group(1);
+//            StringBuilder minecraftHex = new StringBuilder("§x");
+//            for (char c : hexColor.toCharArray()) {
+//                minecraftHex.append("§").append(c);
+//            }
+//            message = message.replace("#" + hexColor, minecraftHex.toString());
+//        }
+//        return message;
+//    }
 
     @Override
     public void onEnable() {
