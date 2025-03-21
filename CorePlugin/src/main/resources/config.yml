@@ -7,4 +7,5 @@ theme:
   tertiary: "&7"
   success: "&a"
   error: "&c"
+  mention: "&a"
   # Add any other custom colors or prefixes here

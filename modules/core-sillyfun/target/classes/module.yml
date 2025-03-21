@@ -1,0 +1,4 @@
+name: core-sillyfun
+version: '3.0'
+main: net.lexibaddie.modules.SillyFunModule
+api-version: '1.20'

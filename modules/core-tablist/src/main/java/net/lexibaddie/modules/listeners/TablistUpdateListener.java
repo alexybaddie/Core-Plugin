@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class TablistUpdateListener implements Listener {
 
     private final YamlConfiguration config;
-    private final net.lexibaddie.core.main plugin;
+    private final main plugin;
 
     public TablistUpdateListener(YamlConfiguration config, net.lexibaddie.core.main plugin) {
         this.config = config;
@@ -22,7 +22,6 @@ public class TablistUpdateListener implements Listener {
 
     @EventHandler
     public void onTablistUpdate(TablistUpdateEvent event) {
-        // Retrieve header and footer lines from the config.
         List<String> headerLines = config.getStringList("header");
         List<String> footerLines = config.getStringList("footer");
         int margin = config.getInt("margin", 0);
@@ -34,18 +33,23 @@ public class TablistUpdateListener implements Listener {
                 .map(line -> processLine(line, margin))
                 .collect(Collectors.toList());
 
-        String header = String.join("\n", processedHeader);
-        String footer = String.join("\n", processedFooter);
-
-        header = main.applyColors(header);
-        footer = main.applyColors(footer);
+        String header = main.applyColors(String.join("\n", processedHeader));
+        String footer = main.applyColors(String.join("\n", processedFooter));
 
         for (Player player : plugin.getServer().getOnlinePlayers()) {
             player.setPlayerListHeaderFooter(header, footer);
+            // Update player's tab list name if the option is enabled.
+            if (config.getBoolean("smallcaps", false)) {
+                player.setPlayerListName(plugin.toSmallCaps(player.getName()));
+            }
         }
     }
 
-    // Helper method to generate a string with 'margin' spaces.
+    private String processLine(String line, int margin) {
+        String marginSpaces = getMarginSpaces(margin);
+        return marginSpaces + line + marginSpaces + "&r";
+    }
+
     private String getMarginSpaces(int margin) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < margin; i++) {
@@ -53,11 +57,4 @@ public class TablistUpdateListener implements Listener {
         }
         return sb.toString();
     }
-
-    // Helper method to process a line by adding margin spaces on left/right and appending a reset code.
-    private String processLine(String line, int margin) {
-        String marginSpaces = getMarginSpaces(margin);
-        return marginSpaces + line + marginSpaces + "&r";
-    }
-
 }

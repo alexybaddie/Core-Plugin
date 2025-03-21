@@ -39,7 +39,7 @@ public class TablistModule implements moduleloader {
         config = YamlConfiguration.loadConfiguration(configFile);
 
         // Register the join listener (so new players get the tablist on join).
-        plugin.getServer().getPluginManager().registerEvents(new TablistListener(config), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new TablistListener(config, plugin), plugin);
         // Register the custom update listener.
         plugin.getServer().getPluginManager().registerEvents(new TablistUpdateListener(config, plugin), plugin);
         plugin.getLogger().info("TablistModule loaded, listeners registered.");

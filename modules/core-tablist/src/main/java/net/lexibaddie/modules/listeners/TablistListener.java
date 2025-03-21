@@ -13,22 +13,23 @@ import java.util.stream.Collectors;
 public class TablistListener implements Listener {
 
     private final YamlConfiguration config;
+    private final main plugin; // using the plugin instance
 
-    public TablistListener(YamlConfiguration config) {
+    public TablistListener(YamlConfiguration config, main plugin) {
         this.config = config;
+        this.plugin = plugin;
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        // Retrieve the header and footer lines from the configuration.
+        // Retrieve header and footer lines from the config.
         List<String> headerLines = config.getStringList("header");
         List<String> footerLines = config.getStringList("footer");
-        // Get the margin value; default is 0 if not set.
         int margin = config.getInt("margin", 0);
 
-        // Process each line to add left/right spaces and a reset code.
+        // Process each line: add left/right margin spaces and append a reset code.
         List<String> processedHeader = headerLines.stream()
                 .map(line -> processLine(line, margin))
                 .collect(Collectors.toList());
@@ -36,19 +37,25 @@ public class TablistListener implements Listener {
                 .map(line -> processLine(line, margin))
                 .collect(Collectors.toList());
 
-        // Combine lines with newlines.
-        String header = String.join("\n", processedHeader);
-        String footer = String.join("\n", processedFooter);
-
-        // Apply color codes.
-        header = main.applyColors(header);
-        footer = main.applyColors(footer);
+        String header = plugin.applyColors(String.join("\n", processedHeader));
+        String footer = plugin.applyColors(String.join("\n", processedFooter));
 
         // Set the player's tablist header and footer.
         player.setPlayerListHeaderFooter(header, footer);
+
+        // If smallcaps option is enabled, update the player's tab list name using the plugin's toSmallCaps.
+        if (config.getBoolean("smallcaps", false)) {
+            player.setPlayerListName(plugin.toSmallCaps(player.getDisplayName()));
+        }
     }
 
-    // Helper method to generate a string with 'margin' spaces.
+    // Helper method to process a line by adding margin spaces and a reset code.
+    private String processLine(String line, int margin) {
+        String marginSpaces = getMarginSpaces(margin);
+        return marginSpaces + line + marginSpaces + "&r";
+    }
+
+    // Helper method to build a string with 'margin' spaces.
     private String getMarginSpaces(int margin) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < margin; i++) {
@@ -56,11 +63,4 @@ public class TablistListener implements Listener {
         }
         return sb.toString();
     }
-
-    // Helper method to process a line by adding margin spaces on left/right and appending a reset code.
-    private String processLine(String line, int margin) {
-        String marginSpaces = getMarginSpaces(margin);
-        return marginSpaces + line + marginSpaces + "&r";
-    }
-
 }

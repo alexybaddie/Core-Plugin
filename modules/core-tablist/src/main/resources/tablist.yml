@@ -7,3 +7,4 @@ footer:
   - "&a<small>Visit our website!</small>"
   - "&e<small>www.server.com</small>"
 margin: 2
+smallcaps: true

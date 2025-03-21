@@ -1,0 +1,6 @@
+# Height offset above the target player's location.
+height: 1.0
+# Horizontal distance from the target.
+distance: 2.0
+# Angular speed in radians per tick.
+speed: 1.0

@@ -25,7 +25,7 @@ public class corecommand implements CommandExecutor, TabCompleter {
         }
         if (args[0].equalsIgnoreCase("reload")) {
             // Reload all modules.
-            plugin.loadModules();
+        //    plugin.loadModules();
             plugin.reloadAllModuleConfigs();
             sender.sendMessage(main.applyColors("&aCore & Modules reloaded."));
             return true;

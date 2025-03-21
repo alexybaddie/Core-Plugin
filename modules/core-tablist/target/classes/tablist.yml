@@ -1,7 +1,10 @@
 header:
-  - "&aWelcome to the server!"
-  - "&bEnjoy your stay!"
+  - "&b&l<small>SERVER</small>"
+  - "&a<small>Enjoy your stay!</small>"
+  - ""
 footer:
-  - "&aVisit our website!"
-  - "&eHave fun!"
+  - ""
+  - "&a<small>Visit our website!</small>"
+  - "&e<small>www.server.com</small>"
 margin: 2
+smallcaps: true

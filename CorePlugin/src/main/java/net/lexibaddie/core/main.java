@@ -36,7 +36,7 @@ public final class main extends JavaPlugin {
 
 
     // Pre-defined mapping from regular letters to small caps.
-    private static final Map<Character, String> SMALL_CAPS_MAP = new HashMap<>();
+    public static final Map<Character, String> SMALL_CAPS_MAP = new HashMap<>();
     static {
         SMALL_CAPS_MAP.put('a', "ᴀ");
         SMALL_CAPS_MAP.put('b', "ʙ");
@@ -116,18 +116,6 @@ public final class main extends JavaPlugin {
         tagMatcher.appendTail(sb);
         message = sb.toString();
 
-        // 3. Convert %smallcaps%...%normal% markers to small caps.
-        Pattern markerPattern = Pattern.compile("%smallcaps%(.*?)%normal%", Pattern.DOTALL);
-        Matcher markerMatcher = markerPattern.matcher(message);
-        sb = new StringBuffer();
-        while (markerMatcher.find()) {
-            String innerText = markerMatcher.group(1);
-            String smallCapped = toSmallCaps(innerText);
-            markerMatcher.appendReplacement(sb, Matcher.quoteReplacement(smallCapped));
-        }
-        markerMatcher.appendTail(sb);
-        message = sb.toString();
-
         // 4. Translate legacy color codes.
         message = ChatColor.translateAlternateColorCodes('&', message);
 
@@ -145,6 +133,27 @@ public final class main extends JavaPlugin {
 
         return message;
     }
+
+    public static String getActiveColor(String message) {
+        String activeColor = "";
+        for (int i = 0; i < message.length() - 1; i++) {
+            if (message.charAt(i) == ChatColor.COLOR_CHAR) {
+                char code = message.charAt(i + 1);
+                // Check if it’s a standard color code (0-9 or a-f)
+                if ((code >= '0' && code <= '9') || (code >= 'a' && code <= 'f')) {
+                    activeColor = "" + ChatColor.COLOR_CHAR + code;
+                }
+                // Handle hex color sequences which start with "§x" followed by six pairs.
+                else if (code == 'x' && i + 13 < message.length()) {
+                    // Extract the full hex color sequence (total length 14: "§x§R§R§G§G§B§B")
+                    activeColor = message.substring(i, i + 14);
+                    i += 13; // Skip over the rest of the hex sequence.
+                }
+            }
+        }
+        return activeColor;
+    }
+
 //    public static String applyColors(String message) {
 //        if (message == null) return "";
 //        // Get the theme section from the config.
